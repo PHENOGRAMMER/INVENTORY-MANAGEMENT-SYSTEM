@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management - Move Items</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <nav class="main-navbar">
+        <div class="main-logo">
+            <img src="Stock/logo.jpg" alt="">
+            <a href="home.html">
+                <h2>W.I.E.T</h2>
+            </a>
+        </div>
+
+        <ul class="main-navbar">
+            <li><a href="items.html">Items</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="http://www.watumull.edu/2024/WIShowPageContent2ColSBMenu1.php?id=The%20Institute">About</a>
+            </li>
+
+        </ul>
+
+        <div class="main-actions">
+            <button id="logoutButton" onclick="window.location.href ='home.html'">Leave</button>
+        </div>
+
+    </nav>
+
+    <div class="content">
+        <h1>Items Overview</h1>
+
+        <div class="search-filter">
+            <div class="search-box">
+                <i class='bx bx-search'></i>
+                <input type="text" id="search" placeholder="Search items...">
+            </div>
+
+            <div class="filter">
+                <select id="filter-type">
+                    <option value="">Filter by Type</option>
+                    <option value="All">All</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Laboratory Equipment">Laboratory Equipment</option>
+                    <option value="Office Supplies">Office Supplies</option>
+                    <option value="Networking">Networking</option>
+                    <option value="Electrical Supplies">Electrical Supplies</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
+
+                </select>
+
+                <select id="filter-floor">
+                    <option value="">Filter by Floor</option>
+                    <option value="Ground">Ground</option>
+                    <option value="1st Floor">1st Floor</option>
+                    <option value="2nd Floor">2nd Floor</option>
+                    <option value="3rd Floor">3rd Floor</option>
+                    <option value="4th Floor">4th Floor</option>
+                    <option value="5th Floor">5th Floor</option>
+                    <option value="6th Floor">6th Floor</option>
+                    <option value="7th Floor">7th Floor</option>
+                </select>
+
+                <select id="filter-room">
+                    <option value="">Filter by Room</option>
+                    <option value="1st Floor">001</option>
+                    <option value="2nd Floor">002</option>
+                    <option value="3rd Floor">003</option>
+                    <option value="4th Floor">Mechanics Lab</option>
+                    <option value="5th Floor">BEE lab</option>
+                    <option value="6th Floor">Physics Lab</option>
+                </select>
+            </div>
+
+            <button class="primary-btn" id="add-item" title="Add New Item">
+                <i class='bx bx-plus'></i>
+            </button>
+
+            <button class="primary-btn" id="move-item" title="Move Items">
+                <i class='bx bx-transfer'></i>
+            </button>
+        </div>
+
+        <table id="items-table" class="inventoryTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                    <th>Room</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="items-tbody">
+                <!-- New items will be added here -->
+            </tbody>
+        </table>
+        
+    </div>
+
+    <!--Add Item -->
+    <div id="add-modal" class="add-modal">
+        <div class="add-content">
+            <span class="add-close">&times;</span>
+            <h2>Add New Item</h2>
+            <form id="add-item-form">
+                <label for="item-name">Item Name:</label>
+                <input type="text" id="item-name" name="item-name" required>
+    
+                <label for="item-quantity">Quantity:</label>
+                <input type="number" id="item-quantity" name="item-quantity" required>
+    
+                <label for="item-category">Category:</label>
+                <select id="item-category" name="item-category" required>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Stationery">Stationery</option>
+                    <option value="Furniture">Furniture</option>
+                </select>
+    
+                <label for="floor-number">Floor Number:</label>
+                <select id="floor-number" name="floor-number" required>
+                    <option value="Ground">Ground</option>
+                    <option value="1st Floor">1st Floor</option>
+                    <option value="2nd Floor">2nd Floor</option>
+                    <option value="3rd Floor">3rd Floor</option>
+                    <option value="4th Floor">4th Floor</option>
+                    <option value="5th Floor">5th Floor</option>
+                    <option value="6th Floor">6th Floor</option>
+                    <option value="7th Floor">7th Floor</option>
+                </select>
+    
+                <label for="room-number">Room Number:</label>
+                <input type="text" id="room-number" name="room-number" required placeholder="Enter Room No.">
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required placeholder="Enter date">
+                
+                <button type="submit">Add Item</button>
+            </form>
+        </div>
+    </div>
+    
+
+    <!--Move Items -->
+    <div class="modal" id="move-item-modal">
+        <span class="close" id="close-modal">&times;</span>
+        <h2>Move Item</h2>
+        <div class="modal-content">
+            <div class="form-group">
+                <label for="item-id">Item ID</label>
+                <input type="text" id="item-id" placeholder="Enter Item ID">
+            </div>
+
+            <div class="form-group">
+                <label for="units">Number of Units</label>
+                <input type="number" id="units" placeholder="Enter Number of Units">
+            </div>
+
+            <div class="form-group">
+                <label for="from-room">From Room</label>
+                <input type="text" id="from-room" placeholder="Enter Source Room">
+            </div>
+
+            <div class="form-group">
+                <label for="to-room">To Room</label>
+                <input type="text" id="to-room" placeholder="Enter Destination Room">
+            </div>
+            <div class="form-group">
+                <label for="date-moved">Date</label>
+                <input type="date" id="date-moved" placeholder="Enter date">
+            </div>
+
+            <!-- Buttons -->
+            <div class="modal-actions">
+                <button class="move-btn" id="move-item-btn">Move</button>
+                <button class="cancel-btn" id="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

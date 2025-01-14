@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management - Watumull Institute of Engineering & Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f9;
+}
+.home-navbar {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: black;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: black;
+}
+
+.links {
+    margin-left: 30px;
+    list-style: none;
+    display: flex;
+    padding: 4px;
+    border-radius: 20px;
+    gap: 15px;
+}
+
+.links a {
+    color: black;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 4px 10px;
+    border-radius: 15px;
+    background: #D4D4D4D4;
+    
+    justify-content:center ;
+
+}
+
+.links a:hover {
+    background-color: #052b9f;
+    color: white;
+}
+
+    .login-btn {
+    font-size: 13px;
+    display: flex;
+    position: relative; /* Keeps it in the same place when scrolling */
+    left: 70%;
+    background-color: black;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1000; /* Ensures the button stays on top of other elements */
+}
+
+
+
+.login-btn:hover {
+    background-color: #9b9494;
+}
+
+.hero {
+    margin: 15px;
+    background: linear-gradient(#052b9f, #0a0a0a);
+    color: white;
+    text-align: center;
+    padding: 9rem 2rem;
+    border-radius: 30px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.hero p {
+    font-size: 16px;
+    margin-bottom: 2rem;
+}
+
+.btn-main {
+    background-color: white;
+    color: #0d6efd;
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-main:hover {
+    background-color: #e0e0e0;
+}
+
+.features {
+    background-color: #f4f4f4;
+    padding: 2rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #000000;
+}
+
+.features-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.feature-item {
+    background: #F9F9F9;
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    flex: 1 1 250px;
+    max-width: calc(25% - 1.5rem);
+    color: #000000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.feature-item i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-item h3 {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.feature-item p {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .feature-item {
+        max-width: calc(50% - 1.5rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .feature-item {
+        max-width: 100%;
+    }
+}
+
+footer {
+    background-color: #cecece;
+    color: black;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="home-navbar">
+            <a href="#" class="logo">
+                <img src="Stock/logo.jpg" alt="">
+                <h2>W.I.E.T</h2>
+            </a>
+
+            <ul class="links">
+                <li><a href="home.html" id="btn">Home<i class='bx bxs-chevron-down'></i></a></li>
+                <li><a href="http://www.watumull.edu/2024/WIShowPageContent2ColSBMenu1.php?id=The%20Institute">About<i class='bx bxs-chevron-down'></i></a></li>
+                <li><a href="http://www.watumull.edu/2024/WIShowPageContent2ColSBMenu1.php?id=Contact">Contact<i class='bx bxs-chevron-down'></i></a></li>
+                <!-- <li><a href="#">Home<i class='bx bxs-chevron-down'></i></a></li> -->
+            </ul>
+
+            <button onclick="window.location.href = 'login.html';" class="login-btn">Log in</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="home-container">
+            <h1>Inventory Management System</h1>
+            <p>Efficiently manage and track all resources at Watumull Institute of Engineering & Technology.</p>
+            <a href="login.html" class="btn-main ">Get Started</a>
+        </div>
+    </section>
+
+<section class="features">
+    <div class="key-container">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-box"></i>
+                <h3>Real-Time Inventory</h3>
+                <p>Monitor inventory levels and resources in real time with our easy-to-use system.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-chart-line"></i>
+                <h3>Data Analytics</h3>
+                <p>Generate detailed reports and track resource usage with advanced data analytics tools.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-users"></i>
+                <h3>User Management</h3>
+                <p>Assign roles and manage access to various inventory modules with a user-friendly interface.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-cogs"></i>
+                <h3>Easy Setup</h3>
+                <p>Quickly set up and integrate the inventory system within your department or institution.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Watumull Institute of Engineering & Technology. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

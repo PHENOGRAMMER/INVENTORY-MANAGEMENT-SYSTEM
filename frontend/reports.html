@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="main-logo">
+            <img src="Stock/logo.jpg" alt="Logo">
+            <a href="home.html">
+                <h2>W.I.E.T</h2>
+            </a>
+        </div>
+        <div class="welcome">
+            <h2>Welcome</h2>
+            <p>Back, User!</p>
+        </div>
+        <ul>
+            <li><a href="items.html"><i class="bx bx-package" style="font-size: 20px;"></i> Items</a></li>
+            <li><a href="#"><i class="bx bxs-bar-chart-square" style="font-size: 20px;"></i> Reports</a></li>
+            <li><a href="#"><i class="bx bx-log-out" style="font-size: 20px;"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Items Report</h1>
+
+        <div class="controls">
+            <form id="filter-form" class="filter-form">
+                <label for="floor">Floor:</label>
+                <input type="text" id="floor" placeholder="Enter Floor">
+
+                <label for="room">Room:</label>
+                <input type="text" id="room" placeholder="Enter Room">
+
+                <label for="search">Search by Name:</label>
+                <input type="text" id="search" placeholder="Search items">
+
+                <button type="submit" class="btn-primary">Apply Filters</button>
+            </form>
+        </div>
+
+        <section class="reports-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Item Count</th>
+                        <th>Floor</th>
+                        <th>Room</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="reports-tbody">
+                    <!-- Dynamic content will be injected here -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reportTableBody = document.querySelector('#reports-tbody');
+            const filterForm = document.querySelector('#filter-form');
+
+            // Function to render the report data in the table
+            function renderReport(report) {
+                reportTableBody.innerHTML = ''; // Clear previous results
+
+                report.forEach((entry) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                <td>${entry.name || 'Unknown'}</td>
+                <td>${entry.category || 'Uncategorized'}</td>
+                <td>${entry.itemCount}</td>
+                <td>${entry.floor || 'N/A'}</td>
+                <td>${entry.room || 'N/A'}</td>
+                <td>${entry.latestTransaction || 'N/A'}</td>
+            `;
+                    reportTableBody.appendChild(row);
+                });
+            }
+
+            // Function to fetch and filter the report
+            async function fetchAndRenderReport(floor = '', room = '', searchQuery = '') {
+                try {
+                    const queryParams = new URLSearchParams({ floor, room });
+                    const response = await fetch(`http://localhost:5000/api/items/report?${queryParams}`);
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch report.');
+                    }
+
+                    const { report } = await response.json();
+                    console.log('Fetched Report:', report); // Debugging log
+
+                    // Apply search query filter if provided
+                    const filteredReport = report.filter((entry) =>
+                        entry.name.toLowerCase().includes(searchQuery) ||
+                        entry.category.toLowerCase().includes(searchQuery)
+                    );
+
+                    // Render the filtered report
+                    renderReport(filteredReport);
+                } catch (error) {
+                    console.error('Error fetching report:', error);
+                    alert('Failed to generate report.');
+                }
+            }
+
+            // Fetch the initial report when the page loads
+            fetchAndRenderReport();
+
+            // Handle form submission for filtering
+            filterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const floor = document.querySelector('#floor').value;
+                const room = document.querySelector('#room').value;
+                const searchQuery = document.querySelector('#search').value.toLowerCase();
+
+                // Fetch and render the filtered report
+                fetchAndRenderReport(floor, room, searchQuery);
+            });
+        });
+
+
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f9;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar .welcome {
+            margin-top: 5px;
+        }
+
+        .sidebar ul {
+            margin-top: 120px;
+        }
+
+        .sidebar ul li {
+            list-style-type: none;
+            height: 50px;
+            line-height: 50px;
+            margin-left: 10px;
+        }
+
+        .sidebar ul li a {
+            color: black;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover {
+            background: #000000;
+            color: white;
+            border-radius: 20px;
+            height: 40px;
+            width: 130px;
+            padding-left: 10px;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
+            overflow-x: auto;
+        }
+
+        .content h1 {
+            font-weight: 400;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .reports-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .reports-table th,
+        .reports-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .reports-table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</body>
+
+</html>
