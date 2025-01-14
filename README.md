@@ -36,3 +36,57 @@ A web-based inventory management solution designed to streamline the management 
   - bcrypt for password hashing.  
   - Input validation for secure and reliable operations.  
   - RESTful API design for backend endpoints.  
+
+## 🛠 Installation  
+
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/your-username/inventory-management-system.git
+   
+2. Navigate to project directory
+   cd inventory-management-system
+
+3. Install dependencies
+   npm install express mongoose dotenv bcrypt
+   npm install --save-dev nodemon
+
+4. Set up environment variables:
+Create a .env file in the root directory and add the following:
+   PORT=your_port_number
+   MONGO_URI=your_mongodb_connection_string
+
+5. Start the development server:
+    npm start
+
+6. Open your browser and navigate to:
+    http://localhost:<your_port_number>
+
+Project Structure:
+├── frontend/           # Static files (CSS, JS, images)  
+├── views/            # HTML templates  
+├── controllers/      # Backend logic  
+├── models/           # Mongoose schemas  
+├── routes/           # API endpoints  
+├── .env              # Environment variables  
+├── server.js         # Entry point  
+└── README.md         # Project documentation  
+
+Lessons Learned
+This project helped me strengthen my skills in:
+
+Full-stack development.
+Building secure and scalable systems.
+Database modeling with Mongoose.
+Designing user-friendly and responsive interfaces.
+🤝 Contributions
+Contributions are welcome! Feel free to fork the repository, make your changes, and submit a pull request.
+
+📄 License
+This project is licensed under the MIT License.
+
+📬 Contact
+If you have any questions or feedback, feel free to reach out:
+
+LinkedIn: www.linkedin.com/in/aryan-balani-
+Email: aryanbalani99@gmail.com
+
